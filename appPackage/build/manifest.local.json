@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
+  "version": "1.0.0",
+  "id": "c778f963-ff1a-41bc-b940-60c1a1a5b14b",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/index.html#/privacy",
+    "termsOfUseUrl": "https://localhost:3000/index.html#/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "McsTeamAppDemolocal",
+    "full": "Full name for McsTeamAppDemo"
+  },
+  "description": {
+    "short": "Short description of McsTeamAppDemo",
+    "full": "Full description of McsTeamAppDemo"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [],
+  "composeExtensions": [],
+  "configurableTabs": [],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://localhost:3000",
+      "websiteUrl": "https://localhost:3000",
+      "scopes": ["personal"]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": ["localhost:3000"],
+  "webApplicationInfo": {
+    "id": "5c65c252-952a-49e7-9e8b-d3a18f3e92dc",
+    "resource": "api://localhost:3000/5c65c252-952a-49e7-9e8b-d3a18f3e92dc"
+  }
+}
