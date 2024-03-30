@@ -7,20 +7,20 @@
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "${{TAB_ENDPOINT}}",
-    "privacyUrl": "${{TAB_ENDPOINT}}/index.html#/privacy",
-    "termsOfUseUrl": "${{TAB_ENDPOINT}}/index.html#/termsofuse"
+    "privacyUrl": "${{TAB_ENDPOINT}}/privacy-policy",
+    "termsOfUseUrl": "${{TAB_ENDPOINT}}/terms-of-use"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "McsTeamAppDemo${{APP_NAME_SUFFIX}}",
-    "full": "Full name for McsTeamAppDemo"
+    "short": "MCS - Teams App",
+    "full": "Macquarie Cloud Services - Teams App"
   },
   "description": {
-    "short": "Short description of McsTeamAppDemo",
-    "full": "Full description of McsTeamAppDemo"
+    "short": "MCS tools for Teams",
+    "full": "Teams App extensive features for Macquarie Cloud Services."
   },
   "accentColor": "#FFFFFF",
   "bots": [],
@@ -28,10 +28,17 @@
   "configurableTabs": [],
   "staticTabs": [
     {
-      "entityId": "index",
-      "name": "Personal Tab",
-      "contentUrl": "${{TAB_ENDPOINT}}",
+      "entityId": "dashboard",
+      "name": "Dashboard",
+      "contentUrl": "${{TAB_ENDPOINT}}/tabs/dashboard",
       "websiteUrl": "${{TAB_ENDPOINT}}",
+      "scopes": ["personal"]
+    },
+    {
+      "entityId": "accounts",
+      "name": "Accounts",
+      "contentUrl": "${{TAB_ENDPOINT}}/tabs/accounts",
+      "websiteUrl": "${{TAB_ENDPOINT}}/accounts",
       "scopes": ["personal"]
     }
   ],

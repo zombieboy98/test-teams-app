@@ -26,6 +26,14 @@ const nextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/manifest.json',
+        destination: '/manifest.webmanifest',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

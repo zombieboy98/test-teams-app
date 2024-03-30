@@ -2,12 +2,12 @@ export default function manifest() {
   return {
     $schema:
       'https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json',
-    manifestVersion: '1.15',
+    manifestVersion: '1.152',
     version: '1.0.0',
     id: `${process.env.TEAMS_APP_ID}`,
     packageName: 'com.microsoft.teams.extension',
     developer: {
-      name: 'Teams App, Inc.',
+      name: 'MCS Dev Team',
       websiteUrl: `${process.env.TAB_ENDPOINT}`,
       privacyUrl: `${process.env.TAB_ENDPOINT}/privacy-policy`,
       termsOfUseUrl: `${process.env.TAB_ENDPOINT}/terms-of-use`,
@@ -17,12 +17,12 @@ export default function manifest() {
       outline: 'outline.png',
     },
     name: {
-      short: 'McsTeamAppDemo',
-      full: 'Macquarie Cloud Services Teams App Demo',
+      short: 'MCS - Teams App',
+      full: 'Macquarie Cloud Services - Teams App',
     },
     description: {
-      short: 'A demo for teams.',
-      full: 'A long description for the demo for teams.',
+      short: 'MCS tools for Teams',
+      full: 'Teams App extensive features for Macquarie Cloud Services.',
     },
     accentColor: '#FFFFFF',
     bots: [],
@@ -30,19 +30,25 @@ export default function manifest() {
     configurableTabs: [],
     staticTabs: [
       {
-        entityId: 'index',
-        name: 'Personal Tab',
-        contentUrl: `${process.env.TAB_ENDPOINT}`,
+        entityId: 'dashboard',
+        name: 'Dashboard',
+        contentUrl: `${process.env.TAB_ENDPOINT}/dashboard`,
         websiteUrl: `${process.env.TAB_ENDPOINT}`,
+        scopes: ['personal'],
+      },
+      {
+        entityId: 'accounts',
+        name: 'Accounts',
+        contentUrl: `${process.env.TAB_ENDPOINT}/accounts`,
+        websiteUrl: `${process.env.TAB_ENDPOINT}/accounts`,
         scopes: ['personal'],
       },
     ],
     permissions: ['identity', 'messageTeamMembers'],
     validDomains: [`${process.env.TAB_ENDPOINT}`],
     webApplicationInfo: {
-      id: 'f79a3e63-32d8-4c5b-8fb4-6489061197c5',
-      resource:
-        'api://customer-insights.macquariecloudservices.com/f79a3e63-32d8-4c5b-8fb4-6489061197c5',
+      id: `${process.env.AAD_APP_CLIENT_ID}`,
+      resource: `api://${process.env.TAB_DOMAIN}/${process.env.AAD_APP_CLIENT_ID}`,
     },
   };
 }
