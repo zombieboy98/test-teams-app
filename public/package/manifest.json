@@ -1,0 +1,41 @@
+{
+  "id": "c778f963-ff1a-41bc-b940-60c1a1a5b14b",
+  "name": {
+    "short": "Customer Insights",
+    "full": "Macquarie Cloud Services Teams App Demo"
+  },
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
+  "version": "1.0.0",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://test-teams-app.vercel.app",
+    "privacyUrl": "https://test-teams-app.vercel.app/privacy-policy",
+    "termsOfUseUrl": "https://test-teams-app.vercel.app/terms-of-use"
+  },
+  "icons": { "color": "color.png", "outline": "outline.png" },
+  "description": {
+    "short": "A demo for teams.",
+    "full": "A long description for the demo for teams."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [],
+  "composeExtensions": [],
+  "configurableTabs": [],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://test-teams-app.vercel.app",
+      "websiteUrl": "https://test-teams-app.vercel.app",
+      "scopes": ["personal"]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": ["test-teams-app.vercel.app"],
+  "webApplicationInfo": {
+    "id": "f79a3e63-32d8-4c5b-8fb4-6489061197c5",
+    "resource": "api://customer-insights.macquariecloudservices.com/f79a3e63-32d8-4c5b-8fb4-6489061197c5"
+  }
+}
