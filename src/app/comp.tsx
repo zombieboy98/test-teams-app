@@ -1,13 +1,13 @@
 'use client';
 
+import UserContext from '@/contexts/user/user-context';
 import { Client } from '@microsoft/microsoft-graph-client';
 import { TokenCredentialAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/azureTokenCredentials';
-import { app, authentication } from '@microsoft/teams-js';
 import {
   TeamsUserCredential,
   TeamsUserCredentialAuthConfig,
 } from '@microsoft/teamsfx';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { testApi } from './test.actions';
 
 export function Comp({
@@ -17,6 +17,8 @@ export function Comp({
   clientId: string;
   initiateLoginEndpoint: string;
 }) {
+  const userContext = useContext(UserContext);
+
   const [data, setData] = useState<
     {
       account_id: number;
@@ -34,11 +36,6 @@ export function Comp({
     clientId,
     initiateLoginEndpoint,
   };
-
-  // const { teamsUserCredential } = useTeamsUserCredential({
-  //   clientId,
-  //   initiateLoginEndpoint,
-  // });
 
   return (
     <div>
@@ -58,40 +55,15 @@ export function Comp({
 
           console.log('PROFILE', profile);
         }}
-      ></button>
+      >
+        Profile
+      </button>
       <button
         className='border border-gray-400 p-2 rounded'
         onClick={async () => {
-          app
-            .initialize()
-            .then(() => {
-              Promise.all([
-                app.getContext(),
-                authentication.getAuthToken(),
-              ]).then(async ([context, token]) => {
-                await testApi(token).then(async (res) => {
-                  setData(res.objects);
-                });
-
-                // fetch(
-                //   'https://customer-insights-api.macquariecloudservices.com/api/crispaccount',
-                //   {
-                //     headers: {
-                //       Authorization: `Bearer ${token}`,
-                //       Accept: 'application/json',
-                //       'Content-Type': 'application/json',
-                //     },
-                //   }
-                // )
-                //   .then((res) => {
-                //     console.log(res);
-                //   })
-                //   .catch((err) => {
-                //     console.log(err);
-                //   });
-              });
-            })
-            .catch((err) => console.log(err));
+          await testApi(userContext?.token ?? '').then(async (res) => {
+            setData(res.objects);
+          });
         }}
       >
         Test
