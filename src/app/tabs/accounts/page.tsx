@@ -1,4 +1,4 @@
-import AccountsPage from '@/app/(website)/accounts/page';
+import AccountsPage from '@/app/(webpage)/accounts/page';
 
 export default function AccountsTab() {
   return AccountsPage();

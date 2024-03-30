@@ -3,7 +3,6 @@
 import { UserInfo } from '@/contexts/user/user-context';
 import UserContextProvider from '@/contexts/user/user-provider';
 import { ReactNode } from 'react';
-import { AppSessionObserver } from './app-session-observer';
 
 type Props = {
   children?: ReactNode;
@@ -13,7 +12,7 @@ type Props = {
 export const AppSessionProvider = ({ ...props }: Props) => {
   return (
     <UserContextProvider user={props.user}>
-      <AppSessionObserver>{props.children}</AppSessionObserver>
+      {props.children}
     </UserContextProvider>
   );
 };

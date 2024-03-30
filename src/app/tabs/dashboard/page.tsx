@@ -1,4 +1,4 @@
-import DashboardPage from '@/app/(website)/page';
+import DashboardPage from '@/components/page/dashboard';
 
 export default function DashboardTab() {
   return DashboardPage();
