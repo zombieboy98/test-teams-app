@@ -1,3 +1,5 @@
+'use client';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,8 +12,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import UserContext from '@/contexts/user/user-context';
+import { useContext } from 'react';
 
 export function UserNav() {
+  const userContext = useContext(UserContext);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,9 +31,11 @@ export function UserNav() {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>shadcn</p>
+            <p className='text-sm font-medium leading-none'>
+              {userContext?.name}
+            </p>
             <p className='text-xs leading-none text-muted-foreground'>
-              m@example.com
+              {userContext?.email}
             </p>
           </div>
         </DropdownMenuLabel>

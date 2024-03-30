@@ -1,28 +1,33 @@
-import { MainNav } from '@/components/shared/main-nav';
-import { Search } from '@/components/shared/search';
-import TeamSwitcher from '@/components/shared/team-switcher';
-import { ThemeModeToggle } from '@/components/shared/theme-toggle';
-import { UserNav } from '@/components/shared/user-nav';
+import useEnvVars from '@/hooks/use-env-vars';
+import { AppMsalSessionObserver } from '@/providers/app-msal-session-observer';
+import { AppMsalSessionProvider } from '@/providers/app-msal-session-provider';
+import { Configuration } from '@azure/msal-browser';
+import { Header } from './_components/header';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { azureClientId, logoutRedirectUri, loginredirectUri } = useEnvVars();
+
+  const config: Configuration = {
+    auth: {
+      clientId: azureClientId,
+      redirectUri: loginredirectUri,
+      postLogoutRedirectUri: logoutRedirectUri,
+      navigateToLoginRequestUrl: true,
+    },
+  };
+
   return (
-    <div className='flex-col md:flex'>
-      <div className='border-b'>
-        <div className='flex h-16 items-center px-4'>
-          <TeamSwitcher />
-          <MainNav className='mx-6' />
-          <div className='ml-auto flex items-center space-x-4'>
-            <Search />
-            <UserNav />
-            <ThemeModeToggle />
-          </div>
+    <AppMsalSessionProvider msalConfig={config}>
+      <AppMsalSessionObserver>
+        <div className='flex-col md:flex'>
+          <Header />
+          <div>{children}</div>
         </div>
-      </div>
-      <div>{children}</div>
-    </div>
+      </AppMsalSessionObserver>
+    </AppMsalSessionProvider>
   );
 }

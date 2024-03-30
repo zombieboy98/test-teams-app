@@ -13,7 +13,6 @@ export async function testApi(token: string) {
   )
     .then(async (res) => {
       const x = await res.json();
-
       return x;
     })
     .catch((err) => {

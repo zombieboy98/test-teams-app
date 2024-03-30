@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import { AppSessionProvider } from '@/providers/app-session-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
@@ -33,7 +32,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppSessionProvider>{children}</AppSessionProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>
