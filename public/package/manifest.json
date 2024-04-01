@@ -5,19 +5,19 @@
   "id": "c778f963-ff1a-41bc-b940-60c1a1a5b14b",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
-    "name": "Teams App, Inc.",
+    "name": "MCS Dev Team",
     "websiteUrl": "https://test-teams-app.vercel.app",
     "privacyUrl": "https://test-teams-app.vercel.app/privacy-policy",
     "termsOfUseUrl": "https://test-teams-app.vercel.app/terms-of-use"
   },
   "icons": { "color": "color.png", "outline": "outline.png" },
   "name": {
-    "short": "McsTeamAppDemo",
-    "full": "Macquarie Cloud Services Teams App Demo"
+    "short": "MCS - Teams App",
+    "full": "Macquarie Cloud Services - Teams App"
   },
   "description": {
-    "short": "A demo for teams.",
-    "full": "A long description for the demo for teams."
+    "short": "MCS tools for Teams",
+    "full": "Teams App extensive features for Macquarie Cloud Services."
   },
   "accentColor": "#FFFFFF",
   "bots": [],
@@ -25,17 +25,24 @@
   "configurableTabs": [],
   "staticTabs": [
     {
-      "entityId": "index",
-      "name": "Personal Tab",
-      "contentUrl": "https://test-teams-app.vercel.app",
+      "entityId": "dashboard",
+      "name": "Dashboard",
+      "contentUrl": "https://test-teams-app.vercel.app/dashboard",
       "websiteUrl": "https://test-teams-app.vercel.app",
+      "scopes": ["personal"]
+    },
+    {
+      "entityId": "accounts",
+      "name": "Accounts",
+      "contentUrl": "https://test-teams-app.vercel.app/accounts",
+      "websiteUrl": "https://test-teams-app.vercel.app/accounts",
       "scopes": ["personal"]
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],
   "validDomains": ["https://test-teams-app.vercel.app"],
   "webApplicationInfo": {
-    "id": "f79a3e63-32d8-4c5b-8fb4-6489061197c5",
-    "resource": "api://customer-insights.macquariecloudservices.com/f79a3e63-32d8-4c5b-8fb4-6489061197c5"
+    "id": "5c65c252-952a-49e7-9e8b-d3a18f3e92dc",
+    "resource": "api://test-teams-app.vercel.app/5c65c252-952a-49e7-9e8b-d3a18f3e92dc"
   }
 }

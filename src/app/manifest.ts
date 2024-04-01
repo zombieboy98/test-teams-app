@@ -2,7 +2,7 @@ export default function manifest() {
   return {
     $schema:
       'https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json',
-    manifestVersion: '1.152',
+    manifestVersion: '1.15',
     version: '1.0.0',
     id: `${process.env.TEAMS_APP_ID}`,
     packageName: 'com.microsoft.teams.extension',
