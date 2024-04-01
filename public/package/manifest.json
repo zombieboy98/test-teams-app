@@ -27,14 +27,14 @@
     {
       "entityId": "dashboard",
       "name": "Dashboard",
-      "contentUrl": "https://test-teams-app.vercel.app/dashboard",
+      "contentUrl": "https://test-teams-app.vercel.app/tabs/dashboard",
       "websiteUrl": "https://test-teams-app.vercel.app",
       "scopes": ["personal"]
     },
     {
       "entityId": "accounts",
       "name": "Accounts",
-      "contentUrl": "https://test-teams-app.vercel.app/accounts",
+      "contentUrl": "https://test-teams-app.vercel.app/tabs/accounts",
       "websiteUrl": "https://test-teams-app.vercel.app/accounts",
       "scopes": ["personal"]
     }

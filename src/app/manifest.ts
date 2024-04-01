@@ -32,14 +32,14 @@ export default function manifest() {
       {
         entityId: 'dashboard',
         name: 'Dashboard',
-        contentUrl: `${process.env.TAB_ENDPOINT}/dashboard`,
+        contentUrl: `${process.env.TAB_ENDPOINT}/tabs/dashboard`,
         websiteUrl: `${process.env.TAB_ENDPOINT}`,
         scopes: ['personal'],
       },
       {
         entityId: 'accounts',
         name: 'Accounts',
-        contentUrl: `${process.env.TAB_ENDPOINT}/accounts`,
+        contentUrl: `${process.env.TAB_ENDPOINT}/tabs/accounts`,
         websiteUrl: `${process.env.TAB_ENDPOINT}/accounts`,
         scopes: ['personal'],
       },
