@@ -1,21 +1,10 @@
 'use server';
 
-export async function testApi(token: string) {
-  return await fetch(
-    'https://customer-insights-api.macquariecloudservices.com/api/crispaccount/',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-    .then(async (res) => {
-      const x = await res.json();
-      return x;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+import { CustomerInsightsApiClient } from '@/lib/customer-insights/customer-insights-api-client';
+
+const apiClient = new CustomerInsightsApiClient();
+
+export async function getCrispAccounts(token: string) {
+  apiClient.setToken(token);
+  return await apiClient.getCrispAccounts();
 }

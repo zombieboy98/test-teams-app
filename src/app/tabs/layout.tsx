@@ -11,10 +11,7 @@ export default function TabsLayout({
     <AppSessionProvider>
       <AppSessionObserver>
         <div className='p-8 pt-6'>
-          <Comp
-            clientId={process.env.AAD_APP_CLIENT_ID!}
-            initiateLoginEndpoint={process.env.TAB_ENDPOINT!}
-          />
+          <Comp />
           {children}
         </div>
       </AppSessionObserver>

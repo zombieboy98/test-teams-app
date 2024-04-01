@@ -2,36 +2,13 @@
 
 import { Button } from '@/components/ui/button';
 import UserContext from '@/contexts/user/user-context';
-import { TeamsUserCredentialAuthConfig } from '@microsoft/teamsfx';
+import { CrispAccount } from '@/lib/customer-insights/types';
 import { useContext, useState } from 'react';
-import { testApi } from './test.actions';
+import { getCrispAccounts } from './test.actions';
 
-export function Comp({
-  clientId,
-  initiateLoginEndpoint,
-}: {
-  clientId: string;
-  initiateLoginEndpoint: string;
-}) {
+export function Comp() {
   const userContext = useContext(UserContext);
-
-  const [data, setData] = useState<
-    {
-      account_id: number;
-      ext: number;
-      home_page: string;
-      industry: string;
-      name: string;
-      notes: string;
-      num_of_employees: number;
-      parent_id: number;
-      phone: string;
-    }[]
-  >([]);
-  const authConfig: TeamsUserCredentialAuthConfig = {
-    clientId,
-    initiateLoginEndpoint,
-  };
+  const [data, setData] = useState<CrispAccount[]>([]);
 
   return (
     <div>
@@ -39,12 +16,16 @@ export function Comp({
         <Button
           className='border border-gray-400 p-2 rounded'
           onClick={async () => {
-            await testApi(userContext?.token ?? '').then(async (res) => {
-              setData(res.objects);
-            });
+            await getCrispAccounts(userContext?.token ?? '').then(
+              async (res) => {
+                if (res) {
+                  setData(res.objects);
+                }
+              }
+            );
           }}
         >
-          Test
+          Get CRISP Accounts
         </Button>
       )}
 
