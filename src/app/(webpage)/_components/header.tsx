@@ -1,7 +1,7 @@
-import { MainNav } from '@/components/shared/main-nav';
-import TeamSwitcher from '@/components/shared/team-switcher';
+import { MainNav } from '@/app/(webpage)/_components/main-nav';
+import TeamSwitcher from '@/app/(webpage)/_components/team-switcher';
+import { UserNav } from '@/app/(webpage)/_components/user-nav';
 import { ThemeModeToggle } from '@/components/shared/theme-toggle';
-import { UserNav } from '@/components/shared/user-nav';
 
 export function Header() {
   return (

@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 
 export default function DashboardWebpage() {
   return (
-    <div className='p-8 pt-6'>
+    <div className='p-8 pt-6 space-y-4'>
+      <DashboardPage />
       <Comp
         clientId={process.env.AAD_APP_CLIENT_ID!}
         initiateLoginEndpoint={process.env.TAB_ENDPOINT!}
       />
-      <DashboardPage />
     </div>
   );
 }

@@ -1,12 +1,8 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import UserContext from '@/contexts/user/user-context';
-import { Client } from '@microsoft/microsoft-graph-client';
-import { TokenCredentialAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/azureTokenCredentials';
-import {
-  TeamsUserCredential,
-  TeamsUserCredentialAuthConfig,
-} from '@microsoft/teamsfx';
+import { TeamsUserCredentialAuthConfig } from '@microsoft/teamsfx';
 import { useContext, useState } from 'react';
 import { testApi } from './test.actions';
 
@@ -39,35 +35,19 @@ export function Comp({
 
   return (
     <div>
-      <button
-        onClick={async () => {
-          const teamsUserCredential = new TeamsUserCredential(authConfig);
-          const authProvider = new TokenCredentialAuthenticationProvider(
-            teamsUserCredential,
-            {
-              scopes: ['User.Read'],
-            }
-          );
-          const graphClient = Client.initWithMiddleware({
-            authProvider: authProvider,
-          });
-          const profile = await graphClient.api('/me').get();
+      {userContext?.token && (
+        <Button
+          className='border border-gray-400 p-2 rounded'
+          onClick={async () => {
+            await testApi(userContext?.token ?? '').then(async (res) => {
+              setData(res.objects);
+            });
+          }}
+        >
+          Test
+        </Button>
+      )}
 
-          console.log('PROFILE', profile);
-        }}
-      >
-        Profile
-      </button>
-      <button
-        className='border border-gray-400 p-2 rounded'
-        onClick={async () => {
-          await testApi(userContext?.token ?? '').then(async (res) => {
-            setData(res.objects);
-          });
-        }}
-      >
-        Test
-      </button>
       <div>
         {data.map((d, index) => (
           <div key={index}>{d.name}</div>

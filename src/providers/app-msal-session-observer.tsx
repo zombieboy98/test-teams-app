@@ -3,7 +3,7 @@
 import UserContext, { UserInfo } from '@/contexts/user/user-context';
 import { InteractionStatus } from '@azure/msal-browser';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { ReactNode, useContext, useEffect } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 
 /**
  * This hook will listen to session changes
@@ -16,6 +16,7 @@ type Props = {
 };
 
 export const AppMsalSessionObserver = ({ ...props }: Props) => {
+  const [token, setToken] = useState<string>();
   const userContext = useContext(UserContext);
   const { instance, accounts, inProgress } = useMsal();
   const isAuthenticated = useIsAuthenticated();
@@ -49,12 +50,12 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
    * Retrieve user information
    */
   useEffect(() => {
-    if (!userContext?.isLoggedIn()) {
+    if (!token) {
       return;
     }
 
     var headers = new Headers();
-    let bearer = 'Bearer ' + userContext?.token;
+    let bearer = 'Bearer ' + token;
     headers.append('Authorization', bearer);
 
     fetch('https://graph.microsoft.com/v1.0/me', {
@@ -67,7 +68,7 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
         name: `${data.givenName} ${data.surname}`.trim(),
       });
     });
-  }, [userContext?.token]);
+  }, [token]);
 
   /**
    * Acquire access token
@@ -79,6 +80,7 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
         account: accounts[0],
       })
       .then((tokenResponse) => {
+        setToken(tokenResponse.accessToken);
         // Do something with the tokenResponse
         userContext?.setUserContext({
           token: accounts[0].idToken ?? tokenResponse.accessToken,
