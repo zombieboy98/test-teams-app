@@ -6,9 +6,9 @@
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "MCS Dev Team",
-    "websiteUrl": "https://test-teams-app.vercel.app",
-    "privacyUrl": "https://test-teams-app.vercel.app/privacy-policy",
-    "termsOfUseUrl": "https://test-teams-app.vercel.app/terms-of-use"
+    "websiteUrl": "https://dev-customer-insights.macquariecloudservices.com",
+    "privacyUrl": "https://dev-customer-insights.macquariecloudservices.com/privacy-policy",
+    "termsOfUseUrl": "https://dev-customer-insights.macquariecloudservices.com/terms-of-use"
   },
   "icons": { "color": "color.png", "outline": "outline.png" },
   "name": {
@@ -27,22 +27,22 @@
     {
       "entityId": "dashboard",
       "name": "Dashboard",
-      "contentUrl": "https://test-teams-app.vercel.app/tabs/dashboard",
-      "websiteUrl": "https://test-teams-app.vercel.app",
+      "contentUrl": "https://dev-customer-insights.macquariecloudservices.com/tabs/dashboard",
+      "websiteUrl": "https://dev-customer-insights.macquariecloudservices.com",
       "scopes": ["personal"]
     },
     {
       "entityId": "accounts",
       "name": "Accounts",
-      "contentUrl": "https://test-teams-app.vercel.app/tabs/accounts",
-      "websiteUrl": "https://test-teams-app.vercel.app/accounts",
+      "contentUrl": "https://dev-customer-insights.macquariecloudservices.com/tabs/accounts",
+      "websiteUrl": "https://dev-customer-insights.macquariecloudservices.com/accounts",
       "scopes": ["personal"]
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["https://test-teams-app.vercel.app"],
+  "validDomains": ["https://dev-customer-insights.macquariecloudservices.com"],
   "webApplicationInfo": {
     "id": "5c65c252-952a-49e7-9e8b-d3a18f3e92dc",
-    "resource": "api://test-teams-app.vercel.app/5c65c252-952a-49e7-9e8b-d3a18f3e92dc"
+    "resource": "api://dev-customer-insights.macquariecloudservices.com/5c65c252-952a-49e7-9e8b-d3a18f3e92dc"
   }
 }

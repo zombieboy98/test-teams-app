@@ -1,5 +1,4 @@
 import useEnvVars from '@/hooks/use-env-vars';
-import { AppMsalSessionObserver } from '@/providers/app-msal-session-observer';
 import { AppMsalSessionProvider } from '@/providers/app-msal-session-provider';
 import { Configuration } from '@azure/msal-browser';
 import { Header } from './_components/header';
@@ -22,12 +21,10 @@ export default function RootLayout({
 
   return (
     <AppMsalSessionProvider msalConfig={config}>
-      <AppMsalSessionObserver>
-        <div className='flex-col md:flex'>
-          <Header />
-          <div>{children}</div>
-        </div>
-      </AppMsalSessionObserver>
+      <div className='flex-col md:flex'>
+        <Header />
+        <div>{children}</div>
+      </div>
     </AppMsalSessionProvider>
   );
 }

@@ -9,7 +9,7 @@ type Props = {
   user?: UserInfo | null;
 };
 
-export const AppSessionObserver = ({ ...props }: Props) => {
+export const TabSessionObserver = ({ ...props }: Props) => {
   const userContext = useContext(UserContext);
 
   useEffect(() => {

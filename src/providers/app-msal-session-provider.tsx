@@ -4,6 +4,7 @@ import { UserInfo } from '@/contexts/user/user-context';
 import UserContextProvider from '@/contexts/user/user-provider';
 import { Configuration, PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
+import { AppMsalSessionObserver } from './app-msal-session-observer';
 
 type Props = {
   children?: React.ReactNode;
@@ -17,7 +18,7 @@ export const AppMsalSessionProvider = ({ ...props }: Props) => {
   return (
     <MsalProvider instance={pca}>
       <UserContextProvider user={props.user}>
-        {props.children}
+        <AppMsalSessionObserver>{props.children}</AppMsalSessionObserver>
       </UserContextProvider>
     </MsalProvider>
   );
