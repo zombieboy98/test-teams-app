@@ -6,9 +6,9 @@ export type ApiResponseMeta = {
   previous: string;
 };
 
-export type ApiResponseCollection<T> = {
+export type ApiResponse<T> = {
   meta: ApiResponseMeta;
-  objects: T[];
+  objects: T;
 };
 
 export type CrispAccount = {
@@ -21,4 +21,10 @@ export type CrispAccount = {
   num_of_employees: number;
   parent_id: number;
   phone: string;
+};
+
+export type MetricDataItem = {
+  metric_id: number;
+  value: number;
+  metric: string;
 };

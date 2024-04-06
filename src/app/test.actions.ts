@@ -8,3 +8,8 @@ export async function getCrispAccounts(token: string) {
   apiClient.setToken(token);
   return await apiClient.getCrispAccounts();
 }
+
+export async function getGlobalMetric(token: string) {
+  apiClient.setToken(token);
+  return await apiClient.getGlobalMetric();
+}

@@ -17,7 +17,7 @@ export const TabSessionObserver = ({ ...props }: Props) => {
       .initialize()
       .then(() => {
         Promise.all([app.getContext(), authentication.getAuthToken()]).then(
-          async ([context, token]) => {
+          ([context, token]) => {
             userContext?.setUserContext({
               id: context.user?.id ?? '',
               email: context.user?.userPrincipalName ?? '',

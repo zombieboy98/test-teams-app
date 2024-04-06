@@ -5,19 +5,19 @@
   "id": "c778f963-ff1a-41bc-b940-60c1a1a5b14b",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
-    "name": "MCS Dev Team",
+    "name": "Macquarie Technology Group",
     "websiteUrl": "https://dev-customer-insights.macquariecloudservices.com",
     "privacyUrl": "https://dev-customer-insights.macquariecloudservices.com/privacy-policy",
     "termsOfUseUrl": "https://dev-customer-insights.macquariecloudservices.com/terms-of-use"
   },
   "icons": { "color": "color.png", "outline": "outline.png" },
   "name": {
-    "short": "MCS - Teams App",
+    "short": "MCS - Customer Insights",
     "full": "Macquarie Cloud Services - Teams App"
   },
   "description": {
-    "short": "MCS tools for Teams",
-    "full": "Teams App extensive features for Macquarie Cloud Services."
+    "short": "MCS customer insights tool",
+    "full": "Macquarie Cloud Services customer insights tool for Microsoft Teams"
   },
   "accentColor": "#FFFFFF",
   "bots": [],

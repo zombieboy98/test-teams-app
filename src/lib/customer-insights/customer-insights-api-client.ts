@@ -1,4 +1,4 @@
-import { ApiResponseCollection, CrispAccount } from './types';
+import { ApiResponse, CrispAccount, MetricDataItem } from './types';
 
 const CUSTOMER_INSIGHT_API_HOST = process.env.CUSTOMER_INSIGHT_API_HOST!;
 
@@ -10,9 +10,22 @@ export class CustomerInsightsApiClient {
       headers: this.getHeaders(),
     }).then(async (res) => {
       if (res.status === 200) {
-        return (await res.json()) as ApiResponseCollection<CrispAccount>;
+        return (await res.json()) as ApiResponse<CrispAccount[]>;
       } else {
         console.error('Failed retrieving CRISP accounts');
+        return null;
+      }
+    });
+  }
+
+  async getGlobalMetric() {
+    return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/globalmetric/`, {
+      headers: this.getHeaders(),
+    }).then(async (res) => {
+      if (res.status === 200) {
+        return (await res.json()) as ApiResponse<MetricDataItem[]>;
+      } else {
+        console.error('Failed retrieving global metric');
         return null;
       }
     });
