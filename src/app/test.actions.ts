@@ -4,9 +4,9 @@ import { CustomerInsightsApiClient } from '@/lib/customer-insights/customer-insi
 
 const apiClient = new CustomerInsightsApiClient();
 
-export async function getCrispAccounts(token: string) {
+export async function getCrispAccounts(token: string, searchParams?: string) {
   apiClient.setToken(token);
-  return await apiClient.getCrispAccounts();
+  return await apiClient.getCrispAccounts(searchParams);
 }
 
 export async function getGlobalMetric(token: string) {

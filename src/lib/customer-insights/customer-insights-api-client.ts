@@ -5,10 +5,15 @@ const CUSTOMER_INSIGHT_API_HOST = process.env.CUSTOMER_INSIGHT_API_HOST!;
 export class CustomerInsightsApiClient {
   constructor(protected accessToken?: string) {}
 
-  async getCrispAccounts() {
-    return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/crispaccount/`, {
-      headers: this.getHeaders(),
-    }).then(async (res) => {
+  //name__ilike
+  async getCrispAccounts(searchParams?: string) {
+    return await fetch(
+      `${CUSTOMER_INSIGHT_API_HOST}/crispaccount/?${searchParams}`,
+      {
+        cache: 'no-store',
+        headers: this.getHeaders(),
+      }
+    ).then(async (res) => {
       if (res.status === 200) {
         return (await res.json()) as ApiResponse<CrispAccount[]>;
       } else {

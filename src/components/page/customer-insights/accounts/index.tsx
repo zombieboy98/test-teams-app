@@ -1,8 +1,7 @@
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
-import { columns } from './components/columns';
-import { DataTable } from './components/data-table';
 import { GlobalMetric } from './components/global-metric';
+import { TableSection } from './components/table-section';
 
 async function getTasks() {
   return [
@@ -814,7 +813,7 @@ export default async function CustomerInsightsAccountsPage() {
 
             <Separator className='my-4' />
             <div className='relative'>
-              <DataTable data={tasks} columns={columns} />
+              <TableSection />
             </div>
           </TabsContent>
           <TabsContent

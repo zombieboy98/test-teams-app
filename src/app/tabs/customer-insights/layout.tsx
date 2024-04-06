@@ -6,11 +6,13 @@ export const metadata: Metadata = {
   description: 'Customer insights for Macquarie Telecom Group.',
 };
 
+type Props = {
+  children: React.ReactNode;
+};
+
 export default function CustomerInsightsTabLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<Props>) {
   return CustomerInsightsLayout({
     basePath: '/tabs/customer-insights',
     children,
