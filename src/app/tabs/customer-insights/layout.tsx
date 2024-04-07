@@ -14,7 +14,6 @@ export default function CustomerInsightsTabLayout({
   children,
 }: Readonly<Props>) {
   return CustomerInsightsLayout({
-    basePath: '/tabs/customer-insights',
     children,
   });
 }

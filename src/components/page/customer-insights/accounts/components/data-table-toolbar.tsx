@@ -14,10 +14,10 @@ interface DataTableToolbarProps<TData> {
 }
 
 export function DataTableToolbar<TData>({
-  table,
+  ...props
 }: DataTableToolbarProps<TData>) {
   const { pageParams, applyParams } = usePageParams();
-  const isFiltered = pageParams.size > 0;
+  const isFiltered = pageParams.get('name__ilike') !== null;
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const setSearchKeyword = useDebouncedCallback((value: string) => {
@@ -26,6 +26,7 @@ export function DataTableToolbar<TData>({
     } else {
       pageParams.delete('name__ilike');
     }
+    pageParams.set('page', '1');
     applyParams();
   }, 200);
 
@@ -45,7 +46,7 @@ export function DataTableToolbar<TData>({
           <Button
             variant='ghost'
             onClick={() => {
-              table.resetColumnFilters();
+              props.table.resetColumnFilters();
               if (searchInputRef.current) {
                 searchInputRef.current.value = '';
                 pageParams.delete('name__ilike');
@@ -60,7 +61,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <DataTableViewOptions table={props.table} />
     </div>
   );
 }

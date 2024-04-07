@@ -1,4 +1,4 @@
-import { GlobalMetric } from './accounts/components/global-metric';
+import { GlobalMetric } from '../_components/global-metric';
 
 export default function CustomerInsightsPage() {
   return (

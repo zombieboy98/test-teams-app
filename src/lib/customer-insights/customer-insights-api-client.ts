@@ -1,11 +1,15 @@
-import { ApiResponse, CrispAccount, MetricDataItem } from './types';
+import {
+  ApiCollectionResponse,
+  CrispAccount,
+  CrispContact,
+  MetricDataItem,
+} from './types';
 
 const CUSTOMER_INSIGHT_API_HOST = process.env.CUSTOMER_INSIGHT_API_HOST!;
 
 export class CustomerInsightsApiClient {
   constructor(protected accessToken?: string) {}
 
-  //name__ilike
   async getCrispAccounts(searchParams?: string) {
     return await fetch(
       `${CUSTOMER_INSIGHT_API_HOST}/crispaccount/?${searchParams}`,
@@ -15,9 +19,54 @@ export class CustomerInsightsApiClient {
       }
     ).then(async (res) => {
       if (res.status === 200) {
-        return (await res.json()) as ApiResponse<CrispAccount[]>;
+        return (await res.json()) as ApiCollectionResponse<CrispAccount[]>;
       } else {
         console.error('Failed retrieving CRISP accounts');
+        return null;
+      }
+    });
+  }
+
+  async getCrispAccountById(id: string) {
+    return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/crispaccount/${id}/`, {
+      cache: 'no-store',
+      headers: this.getHeaders(),
+    }).then(async (res) => {
+      if (res.status === 200) {
+        return (await res.json()) as CrispAccount;
+      } else {
+        console.error('Failed retrieving CRISP account');
+        return null;
+      }
+    });
+  }
+
+  async getCrispContacts(searchParams?: string) {
+    return await fetch(
+      `${CUSTOMER_INSIGHT_API_HOST}/crispcontact/?${searchParams}`,
+      {
+        cache: 'no-store',
+        headers: this.getHeaders(),
+      }
+    ).then(async (res) => {
+      if (res.status === 200) {
+        return (await res.json()) as ApiCollectionResponse<CrispContact[]>;
+      } else {
+        console.error('Failed retrieving CRISP contacts');
+        return null;
+      }
+    });
+  }
+
+  async getCrispContactById(id: string) {
+    return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/crispcontact/${id}/`, {
+      cache: 'no-store',
+      headers: this.getHeaders(),
+    }).then(async (res) => {
+      if (res.status === 200) {
+        return (await res.json()) as CrispContact;
+      } else {
+        console.error('Failed retrieving CRISP contacts');
         return null;
       }
     });
@@ -28,7 +77,20 @@ export class CustomerInsightsApiClient {
       headers: this.getHeaders(),
     }).then(async (res) => {
       if (res.status === 200) {
-        return (await res.json()) as ApiResponse<MetricDataItem[]>;
+        return (await res.json()) as ApiCollectionResponse<MetricDataItem[]>;
+      } else {
+        console.error('Failed retrieving global metric');
+        return null;
+      }
+    });
+  }
+
+  async getAccountMetric(id: string) {
+    return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/accountmetric/${id}/`, {
+      headers: this.getHeaders(),
+    }).then(async (res) => {
+      if (res.status === 200) {
+        return (await res.json()) as ApiCollectionResponse<MetricDataItem[]>;
       } else {
         console.error('Failed retrieving global metric');
         return null;

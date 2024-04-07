@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import UserContext from '@/contexts/user/user-context';
 import { cn } from '@/lib/utils';
 import {
   Building2Icon,
@@ -10,14 +11,15 @@ import {
   Settings,
 } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
+import { useContext } from 'react';
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  basePath: string;
-}
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function Sidebar({ basePath, className }: SidebarProps) {
+export function Sidebar({ className }: SidebarProps) {
+  const userContext = useContext(UserContext);
   const pathname = usePathname();
   const router = useRouter();
+  const basePath = `${userContext?.basePath}/customer-insights`;
 
   return (
     <div className={cn('pb-12', className)}>

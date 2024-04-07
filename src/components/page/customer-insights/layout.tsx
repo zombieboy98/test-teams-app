@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { Sidebar } from './components/sidebar';
+import { Sidebar } from './_components/sidebar';
 
 export const metadata: Metadata = {
   title: 'Customer Insights',
@@ -8,10 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default function CustomerInsightsLayout({
-  basePath,
   children,
 }: Readonly<{
-  basePath: string;
   children: React.ReactNode;
 }>) {
   return (
@@ -19,7 +17,7 @@ export default function CustomerInsightsLayout({
       <div className='md:block'>
         <div className='bg-background'>
           <div className='grid lg:grid-cols-6'>
-            <Sidebar className='hidden lg:block' basePath={basePath} />
+            <Sidebar className='hidden lg:block' />
             <div className='col-span-4 lg:col-span-5 lg:border-l'>
               {children}
             </div>

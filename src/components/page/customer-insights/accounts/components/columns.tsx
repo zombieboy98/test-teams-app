@@ -1,9 +1,12 @@
 'use client';
 
 import { Checkbox } from '@/components/ui/checkbox';
+import UserContext from '@/contexts/user/user-context';
 import { CrispAccount } from '@/lib/customer-insights/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { DataTableColumnHeader } from './data-table-column-header';
+import Link from 'next/link';
+import { useContext } from 'react';
+import { DataTableColumnHeader } from '../../../_components/data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 
 export const columns: ColumnDef<CrispAccount>[] = [
@@ -38,19 +41,42 @@ export const columns: ColumnDef<CrispAccount>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='ID' />
     ),
-    cell: ({ row }) => <div className='w-fit'>{row.original.account_id}</div>,
+    cell: ({ row }) => {
+      const userContext = useContext(UserContext);
+
+      return (
+        <div className='w-fit'>
+          <Link
+            href={`${
+              userContext?.basePath
+            }/customer-insights/accounts/${row.original.account_id.toString()}`}
+          >
+            {row.original.account_id}
+          </Link>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'name',
-    enableSorting: true,
+    enableSorting: false,
     enableHiding: false,
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Account' />
     ),
     cell: ({ row }) => {
+      const userContext = useContext(UserContext);
+
       return (
         <div className='flex flex-col gap-2 max-w-[400px]'>
-          <span className='text-wrap font-medium'>{row.original.name}</span>
+          <Link
+            className='text-wrap font-medium hover:underline underline-offset-2'
+            href={`${
+              userContext?.basePath
+            }/customer-insights/accounts/${row.original.account_id.toString()}`}
+          >
+            {row.original.name}
+          </Link>
           {row.original.industry && (
             <div className='text-xs text-muted-foreground text-wrap'>
               {row.original.industry}

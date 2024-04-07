@@ -3,31 +3,53 @@
 import { getCrispAccounts } from '@/app/test.actions';
 import UserContext from '@/contexts/user/user-context';
 import usePageParams from '@/hooks/use-stateful-search-params';
-import { CrispAccount } from '@/lib/customer-insights/types';
+import {
+  ApiCollectionResponse,
+  CrispAccount,
+} from '@/lib/customer-insights/types';
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { DataTable } from '../../../_components/data-table';
 import { columns } from './columns';
-import { DataTable } from './data-table';
 
 export function TableSection() {
   const userContext = useContext(UserContext);
-  const { pageParams } = usePageParams();
-  const [data, setData] = useState<CrispAccount[]>([]);
+  const { pageParams, applyParams } = usePageParams();
+  const [response, setResponse] = useState<ApiCollectionResponse<
+    CrispAccount[]
+  > | null>();
 
   useEffect(() => {
     if (!userContext?.isLoggedIn()) return;
 
     getCrispAccounts(userContext?.token, pageParams.toString())
       .then((res) => {
-        console.log(res);
-        if (res !== null) {
-          setData(res.objects);
-        }
+        setResponse(res);
       })
       .catch(() =>
         toast.error('Something unexpected occured while retrieving accounts.')
       );
-  }, [userContext?.isLoggedIn(), pageParams.get('name__ilike')]);
+  }, [userContext?.isLoggedIn(), pageParams.toString()]);
 
-  return <DataTable data={data} columns={columns} />;
+  return (
+    <DataTable
+      data={response?.objects ?? []}
+      columns={columns}
+      pagination={{
+        totalRecords: response?.meta.count ?? 0,
+        pagingState: {
+          per_page: 20,
+          page: response?.meta.page ?? 0,
+        },
+        goToPage: (page) => {
+          pageParams.set('page', page.toString());
+          applyParams();
+        },
+        setPageSize: (page_size) => {
+          // Do nothing
+        },
+        allowedPageSizes: [20],
+      }}
+    />
+  );
 }

@@ -4,6 +4,7 @@ export type UserInfo = {
   id: string;
   email: string;
   name: string;
+  basePath: string;
   token: string;
 };
 

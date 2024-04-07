@@ -1,8 +1,8 @@
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { GlobalMetric } from '../../_components/global-metric';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
-import { GlobalMetric } from './components/global-metric';
 
 async function getTasks() {
   return [

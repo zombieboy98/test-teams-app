@@ -26,6 +26,7 @@ export const TabSessionObserver = ({ ...props }: Props) => {
                 context.user?.userPrincipalName ??
                 '',
               token: token,
+              basePath: '/tabs',
             });
           }
         );

@@ -31,8 +31,6 @@ export function GlobalMetric({ ...props }: Props) {
         if (res !== null) {
           setMetric(res.objects);
         }
-
-        console.log('METRICS', res);
       })
       .catch(() => {});
   }, [userContext?.isLoggedIn()]);
