@@ -24,7 +24,7 @@ export function DataTableToolbar<TData>({
 
   const setSearchKeyword = useDebouncedCallback((value: string) => {
     if (value.length > 0) {
-      pageParams.set('first_name__ilike', `${value}%`);
+      pageParams.set('first_name__ilike', `%${value}%`);
       // pageParams.set('last_name__ilike', `%${value}%`);
     } else {
       pageParams.delete('first_name__ilike');
