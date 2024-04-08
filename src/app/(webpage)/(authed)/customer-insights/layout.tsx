@@ -11,8 +11,5 @@ export default function CustomerInsightsWebpageLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return CustomerInsightsLayout({
-    basePath: 'customer-insights',
-    children,
-  });
+  return <CustomerInsightsLayout>{children}</CustomerInsightsLayout>;
 }

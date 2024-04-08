@@ -7,9 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardWebpage() {
-  return (
-    <div className='p-8 pt-6 space-y-4'>
-      <DashboardPage />
-    </div>
-  );
+  return <DashboardPage />;
 }

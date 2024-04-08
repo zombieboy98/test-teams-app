@@ -3,6 +3,7 @@
 import UserContext, { UserInfo } from '@/contexts/user/user-context';
 import { InteractionStatus } from '@azure/msal-browser';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { useRouter } from 'next/navigation';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 
 /**
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export const AppMsalSessionObserver = ({ ...props }: Props) => {
+  const router = useRouter();
   const [token, setToken] = useState<string>();
   const userContext = useContext(UserContext);
   const { instance, accounts, inProgress } = useMsal();
@@ -40,9 +42,7 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
       console.log('User is not authenticated');
 
       // Strict
-      instance.loginRedirect({
-        scopes: ['User.Read'],
-      });
+      router.push('/auth/login');
     }
   }, [inProgress, isAuthenticated, accounts, userContext?.token]);
 
@@ -90,11 +90,8 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
           basePath: '',
         });
       })
-      .catch(async (err) => {
-        return await instance.acquireTokenRedirect({
-          scopes: ['User.Read'],
-          account: accounts[0],
-        });
+      .catch(async () => {
+        router.push('/auth/login');
       });
   };
 

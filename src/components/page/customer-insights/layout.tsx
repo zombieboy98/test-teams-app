@@ -13,17 +13,9 @@ export default function CustomerInsightsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <div className='md:block'>
-        <div className='bg-background'>
-          <div className='grid lg:grid-cols-6'>
-            <Sidebar className='hidden lg:block' />
-            <div className='col-span-4 lg:col-span-5 lg:border-l'>
-              {children}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <div className='grid lg:grid-cols-6 flex-grow'>
+      <Sidebar className='hidden lg:block' />
+      <div className='col-span-4 lg:col-span-5 lg:border-l'>{children}</div>
+    </div>
   );
 }

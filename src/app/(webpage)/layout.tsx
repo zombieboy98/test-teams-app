@@ -1,7 +1,6 @@
 import useEnvVars from '@/hooks/use-env-vars';
 import { AppMsalSessionProvider } from '@/providers/app-msal-session-provider';
 import { Configuration } from '@azure/msal-browser';
-import { Header } from './_components/header';
 
 export default function RootLayout({
   children,
@@ -21,10 +20,7 @@ export default function RootLayout({
 
   return (
     <AppMsalSessionProvider msalConfig={config}>
-      <div className='flex-col md:flex'>
-        <Header />
-        <div>{children}</div>
-      </div>
+      {children}
     </AppMsalSessionProvider>
   );
 }
