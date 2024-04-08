@@ -7,8 +7,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import UserContext from '@/contexts/user/user-context';
+import { CrispContact } from '@/lib/customer-insights/types';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
+import Link from 'next/link';
+import { useContext } from 'react';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -17,6 +21,9 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
+  const contact = row.original as CrispContact;
+  const userContext = useContext(UserContext);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,7 +36,15 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
-        <DropdownMenuItem>View Details</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link
+            href={`${
+              userContext?.basePath
+            }/customer-insights/contacts/${contact.account_contact_id.toString()}`}
+          >
+            View Contact
+          </Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -127,7 +127,7 @@ export function DataTablePagination({ ...props }: PaginationProps) {
           )}
         </div>
 
-        <div className='flex w-[100px] items-center justify-center text-sm font-medium'>
+        <div className='flex w-[400px] items-center justify-center text-sm font-medium'>
           {props.pagingState.page} of {totalPages}
         </div>
       </div>

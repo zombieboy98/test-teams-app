@@ -10,7 +10,7 @@ export default function CustomerInsightsAccountDetailsPage({
   ...props
 }: Props) {
   return (
-    <div className='h-full px-4 py-6 lg:px-8 space-y-6'>
+    <div className='h-full px-4 pt-6 pb-12 lg:px-8 space-y-6'>
       <AccountHeader accountId={props.id} />
       <div>
         <AccountMetric accountId={props.id} />

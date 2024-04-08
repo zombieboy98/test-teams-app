@@ -96,6 +96,11 @@ export const columns: ColumnDef<CrispContact>[] = [
               </Badge>
             )}
           </div>
+          {row.original.email && (
+            <div className='text-xs text-muted-foreground text-wrap'>
+              {row.original.email}
+            </div>
+          )}
         </div>
       );
     },
@@ -116,6 +121,29 @@ export const columns: ColumnDef<CrispContact>[] = [
     },
   },
   {
+    accessorKey: 'company',
+    enableSorting: false,
+    enableHiding: true,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Company' />
+    ),
+    cell: ({ row }) => {
+      const userContext = useContext(UserContext);
+
+      return (
+        <div className='text-sm text-muted-foreground text-wrap'>
+          <Link
+            href={`${userContext?.basePath}/customer-insights/accounts/${row.original?.account_id}`}
+            id='company'
+            className='tracking-normal hover:text-foreground hover:underline underline-offset-2'
+          >
+            {row.original.company}
+          </Link>
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: 'updated',
     enableSorting: false,
     enableHiding: true,
@@ -128,7 +156,9 @@ export const columns: ColumnDef<CrispContact>[] = [
       const yearInMs = 1000 * 60 * 60 * 24 * 365;
       const isStale = Number(now) - Number(lastUpdate) >= yearInMs;
 
-      return (
+      return !row.original.change_dt ? (
+        <></>
+      ) : (
         <Badge
           variant='outline'
           className={cn('font-light', isStale ? 'text-orange-400' : '')}

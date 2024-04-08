@@ -4,7 +4,7 @@ import { TableSection } from './components/table-section';
 
 export default function CustomerInsightsContactsPage() {
   return (
-    <div className='h-full px-4 py-6 lg:px-8 relative space-y-4'>
+    <div className='h-full px-4 pt-6 pb-12 lg:px-8 relative space-y-4'>
       <div className='space-y-4'>
         <div className='flex items-center justify-between'>
           <div className='space-y-1'>

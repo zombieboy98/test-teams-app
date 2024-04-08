@@ -96,6 +96,11 @@ export const columns: ColumnDef<CrispContact>[] = [
               </Badge>
             )}
           </div>
+          {row.original.email && (
+            <div className='text-xs text-muted-foreground text-wrap'>
+              {row.original.email}
+            </div>
+          )}
         </div>
       );
     },
@@ -109,7 +114,7 @@ export const columns: ColumnDef<CrispContact>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <div className='text-xs text-muted-foreground text-wrap'>
+        <div className='text-muted-foreground text-wrap'>
           {row.original.position}
         </div>
       );
@@ -131,7 +136,7 @@ export const columns: ColumnDef<CrispContact>[] = [
       return (
         <Badge
           variant='outline'
-          className={cn('font-light', isStale ? 'text-orange-400' : '')}
+          className={cn('', isStale ? 'text-orange-400' : '')}
         >
           <span className='max-w-[500px] truncate'>
             {formatDistanceToNow(new Date(row.original.change_dt), {

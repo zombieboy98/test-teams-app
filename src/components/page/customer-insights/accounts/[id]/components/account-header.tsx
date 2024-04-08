@@ -45,51 +45,58 @@ export function AccountHeader({ ...props }: Props) {
   return (
     <div>
       <h2 className='scroll-m-20 border-b pb-4 text-3xl font-semibold tracking-tight first:mt-0 flex flex-col gap-1'>
-        {account?.name}
-        <p className='w-fit tracking-wide text-muted-foreground text-sm font-light'>
-          {loading ? <Skeleton className='w-64 h-16' /> : account?.industry}
-        </p>
+        {loading ? (
+          <Skeleton className='w-64 h-16' />
+        ) : (
+          <>
+            {account?.name}
+            <p className='w-fit tracking-wide text-muted-foreground text-sm font-light'>
+              {account?.industry}
+            </p>
+          </>
+        )}
+
         <div className='space-x-2'>
           <Badge
             variant={'outline'}
-            className='w-fit tracking-wide py-1.5 px-3 hover:underline underline-offset-2 text-xs text-muted-foreground'
+            className='w-fit font-light tracking-wide py-1.5 px-3 hover:underline underline-offset-2 text-xs text-muted-foreground'
           >
-            <KeyRound className='size-4 mr-2' />
+            <KeyRound className='size-3.5 mr-2' />
             {account?.account_id}
           </Badge>
           {account?.home_page && (
             <Badge
               variant={'outline'}
-              className='w-fit tracking-wide py-1.5 px-3 hover:underline underline-offset-2 text-xs text-muted-foreground'
+              className='w-fit font-light tracking-wide py-1.5 px-3 hover:underline underline-offset-2 text-xs text-muted-foreground'
             >
-              <GlobeIcon className='size-4 mr-2' />
+              <GlobeIcon className='size-3.5 mr-2' />
               {account?.home_page}
             </Badge>
           )}
           {account?.phone && (
             <Badge
               variant={'outline'}
-              className='w-fit tracking-wide py-1.5 px-3 text-xs text-muted-foreground'
+              className='w-fit font-light tracking-wide py-1.5 px-3 text-xs text-muted-foreground'
             >
-              <PhoneIcon className='size-4 mr-2' />
+              <PhoneIcon className='size-3.5 mr-2' />
               {account?.phone} {account?.ext ? `(${account.ext})` : ''}
             </Badge>
           )}
           {account?.num_of_employees && (
             <Badge
               variant={'outline'}
-              className='w-fit tracking-wide py-1.5 px-3 text-xs text-muted-foreground'
+              className='w-fit font-light tracking-wide py-1.5 px-3 text-xs text-muted-foreground'
             >
-              <UsersRoundIcon className='size-4 mr-2' />
+              <UsersRoundIcon className='size-3.5 mr-2' />
               {account?.num_of_employees ?? 0}
             </Badge>
           )}
           {account?.notes && (
             <Badge
               variant={'outline'}
-              className='w-fit tracking-wide py-1.5 px-3 text-xs text-muted-foreground'
+              className='w-fit font-light tracking-wide py-1.5 px-3 text-xs text-muted-foreground'
             >
-              <NotepadTextIcon className='size-4 mr-2' />
+              <NotepadTextIcon className='size-3.5 mr-2' />
               {account?.notes}
             </Badge>
           )}

@@ -34,7 +34,7 @@ export function TableSection() {
         toast.dismiss();
       })
       .catch(() =>
-        toast.error('Something unexpected occured while retrieving accounts.')
+        toast.error('Something unexpected occured while retrieving contacts.')
       );
   }, [userContext?.isLoggedIn(), pageParams.toString()]);
 
