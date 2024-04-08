@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
@@ -33,6 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster theme='system' position='bottom-center' />
         </ThemeProvider>
       </body>
     </html>

@@ -28,7 +28,7 @@ export function DataTableToolbar<TData>({
     }
     pageParams.set('page', '1');
     applyParams();
-  }, 200);
+  }, 500);
 
   return (
     <div className='flex items-center justify-between'>

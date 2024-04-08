@@ -96,12 +96,21 @@ export const columns: ColumnDef<CrispContact>[] = [
               </Badge>
             )}
           </div>
-
-          {row.original.position && (
-            <div className='text-xs text-muted-foreground text-wrap'>
-              {row.original.position}
-            </div>
-          )}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'position',
+    enableSorting: false,
+    enableHiding: true,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Position' />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className='text-xs text-muted-foreground text-wrap'>
+          {row.original.position}
         </div>
       );
     },

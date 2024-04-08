@@ -17,18 +17,22 @@ export function DataTableToolbar<TData>({
   ...props
 }: DataTableToolbarProps<TData>) {
   const { pageParams, applyParams } = usePageParams();
-  const isFiltered = pageParams.get('name__ilike') !== null;
+  const isFiltered =
+    pageParams.get('first_name__ilike') !== null ||
+    pageParams.get('last_name__ilike') !== null;
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const setSearchKeyword = useDebouncedCallback((value: string) => {
     if (value.length > 0) {
-      pageParams.set('name__ilike', `%${value}%`);
+      pageParams.set('first_name__ilike', `%${value}%`);
+      // pageParams.set('last_name__ilike', `%${value}%`);
     } else {
-      pageParams.delete('name__ilike');
+      pageParams.delete('first_name__ilike');
+      // pageParams.delete('last_name__ilike');
     }
     pageParams.set('page', '1');
     applyParams();
-  }, 200);
+  }, 500);
 
   return (
     <div className='flex items-center justify-between'>
@@ -36,7 +40,9 @@ export function DataTableToolbar<TData>({
         <Input
           ref={searchInputRef}
           placeholder='Search contacts...'
-          defaultValue={pageParams.get('name__ilike')?.replaceAll('%', '')}
+          defaultValue={pageParams
+            .get('first_name__ilike')
+            ?.replaceAll('%', '')}
           onChange={(event) => {
             setSearchKeyword(event.target.value);
           }}
@@ -49,7 +55,8 @@ export function DataTableToolbar<TData>({
               props.table.resetColumnFilters();
               if (searchInputRef.current) {
                 searchInputRef.current.value = '';
-                pageParams.delete('name__ilike');
+                pageParams.delete('first_name__ilike');
+                pageParams.delete('last_name__ilike');
                 pageParams.delete('page');
                 applyParams();
               }

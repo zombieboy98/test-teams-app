@@ -1,7 +1,6 @@
 'use client';
 
 import { DataTableColumnHeader } from '@/components/page/_components/data-table-column-header';
-import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import UserContext from '@/contexts/user/user-context';
 import { CrispAccount } from '@/lib/customer-insights/types';
@@ -84,12 +83,24 @@ export const columns: ColumnDef<CrispAccount>[] = [
               {row.original.industry}
             </div>
           )}
-          {row.original.home_page && (
-            <span className='text-xs hover:underline underline-offset-2 truncate flex gap-2'>
-              {row.original.home_page}
-            </span>
-          )}
         </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'homepage',
+    enableSorting: false,
+    enableHiding: true,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Homepage' />
+    ),
+    cell: ({ row }) => {
+      return row.original.home_page ? (
+        <span className='max-w-[500px] truncate font-light text-xs'>
+          {row.original.home_page}
+        </span>
+      ) : (
+        <></>
       );
     },
   },
@@ -102,9 +113,9 @@ export const columns: ColumnDef<CrispAccount>[] = [
     ),
     cell: ({ row }) => {
       return row.original.notes ? (
-        <Badge variant='outline' className='font-light'>
-          <span className='max-w-[500px] truncate'>{row.original.notes}</span>
-        </Badge>
+        <span className='max-w-[500px] truncate font-light text-xs'>
+          {row.original.notes}
+        </span>
       ) : (
         <></>
       );

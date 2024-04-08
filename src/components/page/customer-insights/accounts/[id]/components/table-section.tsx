@@ -2,6 +2,7 @@
 
 import { getCrispContacts } from '@/app/test.actions';
 import { DataTable } from '@/components/page/_components/data-table';
+import { Skeleton } from '@/components/ui/skeleton';
 import UserContext from '@/contexts/user/user-context';
 import usePageParams from '@/hooks/use-stateful-search-params';
 import {
@@ -29,6 +30,7 @@ export function TableSection({ ...props }: Props) {
       return;
     }
 
+    toast.message('Please wait...');
     getCrispContacts(
       userContext?.token,
       `account_id=${
@@ -39,13 +41,19 @@ export function TableSection({ ...props }: Props) {
         if (res !== null) {
           setResponse(res);
         }
+        toast.dismiss();
       })
       .catch(() => {
         toast.error('Something unexpected occured while retrieving contacts.');
       });
-  }, [userContext?.isLoggedIn(), props.accountId]);
+  }, [userContext?.isLoggedIn(), props.accountId, pageParams.toString()]);
 
-  return (
+  return response === undefined ? (
+    <div className='space-y-4'>
+      <Skeleton className='w-64 h-8' />
+      <Skeleton className='w-full h-48' />
+    </div>
+  ) : (
     <DataTable
       data={response?.objects ?? []}
       columns={columns}
@@ -58,6 +66,7 @@ export function TableSection({ ...props }: Props) {
         },
         goToPage: (page) => {
           pageParams.set('page', page.toString());
+          alert(pageParams.toString());
           applyParams();
         },
         setPageSize: (page_size) => {

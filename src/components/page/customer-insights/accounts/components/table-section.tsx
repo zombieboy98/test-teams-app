@@ -2,6 +2,7 @@
 
 import { getCrispAccounts } from '@/app/test.actions';
 import { DataTable } from '@/components/page/_components/data-table';
+import { Skeleton } from '@/components/ui/skeleton';
 import UserContext from '@/contexts/user/user-context';
 import usePageParams from '@/hooks/use-stateful-search-params';
 import {
@@ -23,16 +24,23 @@ export function TableSection() {
   useEffect(() => {
     if (!userContext?.isLoggedIn()) return;
 
+    toast.message('Please wait...');
     getCrispAccounts(userContext?.token, pageParams.toString())
       .then((res) => {
         setResponse(res);
+        toast.dismiss();
       })
       .catch(() =>
         toast.error('Something unexpected occured while retrieving accounts.')
       );
   }, [userContext?.isLoggedIn(), pageParams.toString()]);
 
-  return (
+  return response === undefined ? (
+    <div className='space-y-4'>
+      <Skeleton className='w-64 h-8' />
+      <Skeleton className='w-full h-48' />
+    </div>
+  ) : (
     <DataTable
       data={response?.objects ?? []}
       columns={columns}
