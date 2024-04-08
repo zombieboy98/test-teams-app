@@ -1,21 +1,25 @@
 'use client';
 
-import {
-  getAccountMetric,
-  getCrispAccountById,
-  getCrispContacts,
-} from '@/app/test.actions';
+import { getCrispAccountById, getCrispContacts } from '@/app/test.actions';
+import { AccountMetric } from '@/components/page/_components/account-metric';
 import { Badge } from '@/components/ui/badge';
 import UserContext from '@/contexts/user/user-context';
-import { CrispAccount } from '@/lib/customer-insights/types';
+import usePageParams from '@/hooks/use-stateful-search-params';
+import {
+  ApiCollectionResponse,
+  CrispAccount,
+  CrispContact,
+} from '@/lib/customer-insights/types';
 import {
   GlobeIcon,
+  KeyRound,
   NotepadTextIcon,
   PhoneIcon,
   UsersRoundIcon,
 } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { TableSection } from './components/table-section';
 
 type Props = {
   id: string;
@@ -24,7 +28,11 @@ type Props = {
 export default function CustomerInsightsAccountDetailsPage({
   ...props
 }: Props) {
+  const { pageParams, applyParams } = usePageParams();
   const [account, setAccount] = useState<CrispAccount>();
+  const [contacts, setContacts] = useState<ApiCollectionResponse<
+    CrispContact[]
+  > | null>();
   const userContext = useContext(UserContext);
 
   useEffect(() => {
@@ -42,20 +50,13 @@ export default function CustomerInsightsAccountDetailsPage({
         toast.error('Something unexpected occured while retrieving account.');
       });
 
-    getCrispContacts(userContext?.token, `account_id=${props.id}`)
+    getCrispContacts(
+      userContext?.token,
+      `account_id=${props.id}&ordering=-change_dt&${pageParams.toString()}`
+    )
       .then((res) => {
         if (res !== null) {
-          console.log('CTX', res);
-        }
-      })
-      .catch(() => {
-        toast.error('Something unexpected occured while retrieving contacts.');
-      });
-
-    getAccountMetric(userContext?.token, props.id)
-      .then((res) => {
-        if (res !== null) {
-          console.log('ACMTX', res);
+          setContacts(res);
         }
       })
       .catch(() => {
@@ -72,6 +73,13 @@ export default function CustomerInsightsAccountDetailsPage({
             {account?.industry}
           </p>
           <div className='space-x-2'>
+            <Badge
+              variant={'outline'}
+              className='w-fit tracking-wide py-1.5 px-2 hover:underline underline-offset-2 text-xs text-muted-foreground'
+            >
+              <KeyRound className='size-4 mr-2' />
+              {account?.account_id}
+            </Badge>
             {account?.home_page && (
               <Badge
                 variant={'outline'}
@@ -111,7 +119,12 @@ export default function CustomerInsightsAccountDetailsPage({
           </div>
         </h2>
       </div>
-      <div className='flex flex-col space-y-1'></div>
+      <div>
+        <AccountMetric accountId={props.id} />
+      </div>
+      <div className='flex flex-col space-y-1'>
+        <TableSection accountId={props.id} />
+      </div>
     </div>
   );
 }

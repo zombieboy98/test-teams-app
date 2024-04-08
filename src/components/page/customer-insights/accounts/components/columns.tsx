@@ -1,12 +1,13 @@
 'use client';
 
+import { DataTableColumnHeader } from '@/components/page/_components/data-table-column-header';
+import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import UserContext from '@/contexts/user/user-context';
 import { CrispAccount } from '@/lib/customer-insights/types';
 import { ColumnDef } from '@tanstack/react-table';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { DataTableColumnHeader } from '../../../_components/data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 
 export const columns: ColumnDef<CrispAccount>[] = [
@@ -47,6 +48,7 @@ export const columns: ColumnDef<CrispAccount>[] = [
       return (
         <div className='w-fit'>
           <Link
+            className='text-wrap font-light hover:underline underline-offset-2 text-xs'
             href={`${
               userContext?.basePath
             }/customer-insights/accounts/${row.original.account_id.toString()}`}
@@ -99,8 +101,12 @@ export const columns: ColumnDef<CrispAccount>[] = [
       <DataTableColumnHeader column={column} title='Notes' />
     ),
     cell: ({ row }) => {
-      return (
-        <span className='max-w-[500px] truncate'>{row.original.notes}</span>
+      return row.original.notes ? (
+        <Badge variant='outline' className='font-light'>
+          <span className='max-w-[500px] truncate'>{row.original.notes}</span>
+        </Badge>
+      ) : (
+        <></>
       );
     },
   },

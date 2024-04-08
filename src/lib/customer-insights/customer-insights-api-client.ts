@@ -72,7 +72,9 @@ export class CustomerInsightsApiClient {
     });
   }
 
-  async getGlobalMetric() {
+  async getGlobalMetric(): Promise<ApiCollectionResponse<
+    MetricDataItem[]
+  > | null> {
     return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/globalmetric/`, {
       headers: this.getHeaders(),
     }).then(async (res) => {
@@ -85,10 +87,15 @@ export class CustomerInsightsApiClient {
     });
   }
 
-  async getAccountMetric(id: string) {
-    return await fetch(`${CUSTOMER_INSIGHT_API_HOST}/accountmetric/${id}/`, {
-      headers: this.getHeaders(),
-    }).then(async (res) => {
+  async getAccountMetric(
+    id: string
+  ): Promise<ApiCollectionResponse<MetricDataItem[]> | null> {
+    return await fetch(
+      `${CUSTOMER_INSIGHT_API_HOST}/accountmetric/?account_id=${id}`,
+      {
+        headers: this.getHeaders(),
+      }
+    ).then(async (res) => {
       if (res.status === 200) {
         return (await res.json()) as ApiCollectionResponse<MetricDataItem[]>;
       } else {

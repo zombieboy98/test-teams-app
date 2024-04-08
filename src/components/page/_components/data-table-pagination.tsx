@@ -64,7 +64,7 @@ export function DataTablePagination({ ...props }: PaginationProps) {
             <Button
               variant='outline'
               className='hidden h-8 w-8 p-0 lg:flex'
-              onClick={() => props.goToPage?.(props.pagingState.page - 1)}
+              onClick={() => props.goToPage?.(1)}
               disabled={!canGoBack}
             >
               <span className='sr-only'>Go to first page</span>

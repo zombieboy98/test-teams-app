@@ -23,18 +23,20 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import * as React from 'react';
-import { DataTableToolbar } from '../customer-insights/accounts/components/data-table-toolbar';
+import { ElementType } from 'react';
 import { DataTablePagination, PaginationProps } from './data-table-pagination';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  Toolbar?: ElementType;
   pagination?: PaginationProps;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  Toolbar,
   pagination,
 }: DataTableProps<TData, TValue>) {
   const { pageParams, applyParams } = usePageParams();
@@ -69,7 +71,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      {Toolbar && <Toolbar table={table} />}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
