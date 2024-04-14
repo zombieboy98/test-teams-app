@@ -1,5 +1,5 @@
-import { MainNav } from '@/app/(webpage)/(authed)/_components/main-nav';
-import { UserNav } from '@/app/(webpage)/(authed)/_components/user-nav';
+import { MainNav } from '@/app/(webpage)/(authenticated)/_components/main-nav';
+import { UserNav } from '@/app/(webpage)/(authenticated)/_components/user-nav';
 import { ThemeModeToggle } from '@/components/shared/theme-toggle';
 
 export function Header() {

@@ -13,7 +13,5 @@ type Props = {
 export default function CustomerInsightsTabLayout({
   children,
 }: Readonly<Props>) {
-  return CustomerInsightsLayout({
-    children,
-  });
+  return <CustomerInsightsLayout>{children}</CustomerInsightsLayout>;
 }
