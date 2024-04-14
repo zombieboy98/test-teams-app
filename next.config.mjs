@@ -23,6 +23,11 @@ const nextConfig = {
       'node_modules',
       'cldrjs'
     );
+    config.resolve.alias['tailwindcss/defaultTheme$'] = path.resolve(
+      __dirname,
+      'node_modules',
+      'tailwindcss'
+    );
 
     return config;
   },
