@@ -6,6 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const nextConfig = {
+  output: 'standalone',
   webpack: (config, { isServer }) => {
     // Add the node_modules directory to webpack's module resolution
     config.resolve.alias['cldr$'] = path.resolve(
