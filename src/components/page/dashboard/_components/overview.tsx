@@ -1,7 +1,5 @@
 'use client';
 
-import UserContext from '@/contexts/user/user-context';
-import { useContext } from 'react';
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 const data = [
@@ -56,8 +54,6 @@ const data = [
 ];
 
 export function Overview() {
-  const user = useContext(UserContext);
-
   return (
     <>
       <ResponsiveContainer width='100%' height={350}>

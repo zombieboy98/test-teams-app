@@ -69,7 +69,7 @@ export function TableSection({ ...props }: Props) {
           alert(pageParams.toString());
           applyParams();
         },
-        setPageSize: (page_size) => {
+        setPageSize: () => {
           // Do nothing
         },
         allowedPageSizes: [20],

@@ -15,21 +15,22 @@ export const TabSessionObserver = ({ ...props }: Props) => {
   useEffect(() => {
     app
       .initialize()
-      .then(() => {
-        Promise.all([app.getContext(), authentication.getAuthToken()]).then(
-          ([context, token]) => {
-            userContext?.setUserContext({
-              id: context.user?.id ?? '',
-              email: context.user?.userPrincipalName ?? '',
-              name:
-                context.user?.displayName ??
-                context.user?.userPrincipalName ??
-                '',
-              token: token,
-              basePath: '/tabs',
-            });
-          }
-        );
+      .then(async () => {
+        await Promise.all([
+          app.getContext(),
+          authentication.getAuthToken(),
+        ]).then(([context, token]) => {
+          userContext?.setUserContext({
+            id: context.user?.id ?? '',
+            email: context.user?.userPrincipalName ?? '',
+            name:
+              context.user?.displayName ??
+              context.user?.userPrincipalName ??
+              '',
+            token: token,
+            basePath: '/tabs',
+          });
+        });
       })
       .catch((err) => console.log('Initialization Failed: ', err));
   }, []);

@@ -8,7 +8,7 @@ import {
 const CUSTOMER_INSIGHT_API_HOST = process.env.CUSTOMER_INSIGHT_API_HOST!;
 
 export class CustomerInsightsApiClient {
-  constructor(protected accessToken?: string) {}
+  constructor(protected _accessToken?: string) {}
 
   async getCrispAccounts(searchParams?: string) {
     return await fetch(
@@ -105,13 +105,13 @@ export class CustomerInsightsApiClient {
     });
   }
 
-  async setToken(accessToken: string) {
-    this.accessToken = accessToken;
+  setToken(accessToken: string) {
+    this._accessToken = accessToken;
   }
 
   private getHeaders(additionalHeaders?: { [key: string]: string }) {
     const baseHeaders = {
-      Authorization: `Bearer ${this.accessToken}`,
+      Authorization: `Bearer ${this._accessToken}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };

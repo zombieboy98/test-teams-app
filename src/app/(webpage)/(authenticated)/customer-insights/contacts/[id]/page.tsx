@@ -1,4 +1,6 @@
+import LoadingPage from '@/app/loading';
 import CustomerInsightsContactDetailsPage from '@/components/page/customer-insights/contacts/[id]';
+import { Suspense } from 'react';
 
 type Props = {
   params: { id: string };
@@ -7,5 +9,9 @@ type Props = {
 export default function CustomerInsightsContactsDetailsWebsite({
   params,
 }: Props) {
-  return <CustomerInsightsContactDetailsPage id={params.id} />;
+  return (
+    <Suspense fallback={<LoadingPage />}>
+      <CustomerInsightsContactDetailsPage id={params.id} />
+    </Suspense>
+  );
 }

@@ -6,6 +6,11 @@ import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 
+type GraphUser = {
+  givenName: string;
+  surname: string;
+};
+
 /**
  * This hook will listen to session changes
  * and attempt to update the UserContext automatically
@@ -36,7 +41,9 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
 
     // If we have a valid identity, set the UserContext
     if (isAuthenticated || accounts.length > 0) {
-      acquireTokenSilent();
+      acquireTokenSilent()
+        .then(() => {})
+        .catch(() => {});
       // If we don't have a valid identity, navigate to home
     } else {
       console.log('User is not authenticated');
@@ -54,20 +61,22 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
       return;
     }
 
-    var headers = new Headers();
-    let bearer = 'Bearer ' + token;
+    const headers = new Headers();
+    const bearer = 'Bearer ' + token;
     headers.append('Authorization', bearer);
 
     fetch('https://graph.microsoft.com/v1.0/me', {
       method: 'GET',
       headers: headers,
-    }).then(async (resp) => {
-      const data = await resp.json();
-      userContext?.setUserContext({
-        ...userContext,
-        name: `${data.givenName} ${data.surname}`.trim(),
-      });
-    });
+    })
+      .then(async (resp) => {
+        const data: GraphUser = (await resp.json()) as GraphUser;
+        userContext?.setUserContext({
+          ...userContext,
+          name: `${data.givenName} ${data.surname}`.trim(),
+        });
+      })
+      .catch(() => {});
   }, [token]);
 
   /**
@@ -90,7 +99,7 @@ export const AppMsalSessionObserver = ({ ...props }: Props) => {
           basePath: '',
         });
       })
-      .catch(async () => {
+      .catch(() => {
         router.push('/auth/login');
       });
   };

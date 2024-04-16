@@ -58,7 +58,7 @@ export function TableSection() {
           pageParams.set('page', page.toString());
           applyParams();
         },
-        setPageSize: (page_size) => {
+        setPageSize: () => {
           // Do nothing
         },
         allowedPageSizes: [20],

@@ -3,15 +3,15 @@
 import { DataTableColumnHeader } from '@/components/page/_components/data-table-column-header';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import UserContext from '@/contexts/user/user-context';
 import { CrispContact } from '@/lib/customer-insights/types';
 import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { formatDistanceToNow } from 'date-fns';
 import { CheckIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useContext } from 'react';
+import { ContactCompanyColumn } from './company-column';
 import { DataTableRowActions } from './data-table-row-actions';
+import { ContactIdColumn } from './id-column';
+import { ContactNameColumn } from './name-column';
 
 export const columns: ColumnDef<CrispContact>[] = [
   {
@@ -46,21 +46,7 @@ export const columns: ColumnDef<CrispContact>[] = [
       <DataTableColumnHeader column={column} title='ID' />
     ),
     cell: ({ row }) => {
-      const userContext = useContext(UserContext);
-      const contactId = row.original.account_contact_id ?? 'Unknown';
-
-      return (
-        <div className='w-fit'>
-          <Link
-            className='text-wrap font-light hover:underline underline-offset-2 text-xs'
-            href={`${
-              userContext?.basePath
-            }/customer-insights/contacts/${contactId.toString()}`}
-          >
-            {contactId}
-          </Link>
-        </div>
-      );
+      return <ContactIdColumn row={row} />;
     },
   },
   {
@@ -71,38 +57,7 @@ export const columns: ColumnDef<CrispContact>[] = [
       <DataTableColumnHeader column={column} title='Name' />
     ),
     cell: ({ row }) => {
-      const userContext = useContext(UserContext);
-      const contactId = row.original.account_contact_id ?? 'Unknown';
-
-      return (
-        <div className='flex flex-col gap-2 max-w-[400px]'>
-          <div className='flex gap-2'>
-            <Link
-              className='text-wrap font-medium hover:underline underline-offset-2'
-              href={`${
-                userContext?.basePath
-              }/customer-insights/contacts/${contactId.toString()}`}
-            >
-              {!row.original.first_name && !row.original.first_name
-                ? 'UNKNOWN'
-                : `${row.original.first_name} ${row.original.last_name}`}
-            </Link>
-            {row.original.type && row.original.type !== 'Active' && (
-              <Badge
-                variant='outline'
-                className='text-xs w-fit hover:underline underline-offset-2 truncate flex gap-2'
-              >
-                {row.original.type}
-              </Badge>
-            )}
-          </div>
-          {row.original.email && (
-            <div className='text-xs text-muted-foreground text-wrap'>
-              {row.original.email}
-            </div>
-          )}
-        </div>
-      );
+      return <ContactNameColumn row={row} />;
     },
   },
   {
@@ -128,19 +83,7 @@ export const columns: ColumnDef<CrispContact>[] = [
       <DataTableColumnHeader column={column} title='Company' />
     ),
     cell: ({ row }) => {
-      const userContext = useContext(UserContext);
-
-      return (
-        <div className='text-sm text-muted-foreground text-wrap'>
-          <Link
-            href={`${userContext?.basePath}/customer-insights/accounts/${row.original?.account_id}`}
-            id='company'
-            className='tracking-normal hover:text-foreground hover:underline underline-offset-2'
-          >
-            {row.original.company}
-          </Link>
-        </div>
-      );
+      return <ContactCompanyColumn row={row} />;
     },
   },
   {
