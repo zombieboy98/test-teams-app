@@ -16,7 +16,11 @@ import UserContext from '@/contexts/user/user-context';
 import { useMsal } from '@azure/msal-react';
 import { useContext } from 'react';
 
-export function UserNav() {
+type Props = {
+  appHostUrl: string;
+};
+
+export function UserNav({ ...props }: Props) {
   const userContext = useContext(UserContext);
   const { instance, accounts } = useMsal();
 
@@ -65,7 +69,7 @@ export function UserNav() {
             await instance.logout({
               account: accounts[0],
               logoutHint: accounts[0].nativeAccountId,
-              postLogoutRedirectUri: 'http://localhost:3000/auth/login',
+              postLogoutRedirectUri: `${props.appHostUrl}/auth/login`,
             });
           }}
         >
