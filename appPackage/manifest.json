@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "MCS - Teams App",
-    "full": "Macquarie Cloud Services - Teams App"
+    "short": "MTG - Teams App",
+    "full": "Macquarie Telecoms Group - Teams App"
   },
   "description": {
-    "short": "MCS tools for Teams",
-    "full": "Teams App extensive features for Macquarie Cloud Services."
+    "short": "Teams App for Macquarie Telecom Group",
+    "full": "Teams App extensive features for Macquarie Telecom Group."
   },
   "accentColor": "#FFFFFF",
   "bots": [],

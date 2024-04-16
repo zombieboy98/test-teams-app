@@ -17,12 +17,12 @@ export default function manifest() {
       outline: 'outline.png',
     },
     name: {
-      short: 'MCS - Customer Insights',
-      full: 'Macquarie Cloud Services - Teams App',
+      short: 'MTG - Teams App',
+      full: 'Macquarie Telecoms Group - Teams App',
     },
     description: {
-      short: 'MCS customer insights tool',
-      full: 'Macquarie Cloud Services customer insights tool for Microsoft Teams',
+      short: 'Teams App for Macquarie Telecom Group',
+      full: 'Teams App extensive features for Macquarie Telecom Group.',
     },
     accentColor: '#FFFFFF',
     bots: [],
