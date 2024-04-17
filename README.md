@@ -1,41 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Macquarie Telecom Group - Teams App
+
+This is a web application that primarily extends MTGs tools and services to Microsoft Teams App.
 
 ## Getting Started
 
-First, run the development server:
+First clone this repository to your local machine.
+Make sure you have at least NodeJS version 20 installed on your local machine.
+Then navigate to the root directory of the repository to install the dependencies.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Running on Local Dev (Teams App)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+First, run the local development server
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run dev:teams
+```
 
-## Learn More
+Then install the MTG - Teams App in Microsoft Teams under
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+Apps > Manage your apps > Upload an app > Upload a custom app
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app package is found in the repository located at `public/install/package.local.zip`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You can now start editing the pages.
+The page auto-updates as you edit the file.
 
-## Deploy on Vercel
+### Running on Local Dev (Browser App)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+First, make sure you have the correct env variable value for `AZURE_CLIENT_ID`.
+Then, make sure you have the redirect URI matches these values on your Azure App Configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+AUTH_LOGIN_REDIRECT_URI=http://localhost:3000/auth/login-callback
+AUTH_LOGOUT_REDIRECT_URI=http://localhost:3000
+```
 
-## Docker
+Lastly, run the local development server
 
-- Build the image by running `docker-compose build`
-- Run the container by running `docker-compose up -d`
+```bash
+npm run dev:web
+```
+
+Navigate to [http://localhost:3000](http://localhost:3000) on your browser to access the app.
+
+### Running on Local Docker (Browser App)
+
+In the root directory check for the `docker-compose.yaml`
+First, make sure you have the correct env variable value for `AZURE_CLIENT_ID`.
+Then, make sure you have the redirect URI matches these values on your Azure App Configuration
+
+```bash
+AUTH_LOGIN_REDIRECT_URI=http://localhost:3000/auth/login-callback
+AUTH_LOGOUT_REDIRECT_URI=http://localhost:3000
+```
+
+Build the image
+
+```bash
+docker-compose build
+```
+
+Start the container
+
+```bash
+docker-compose up -d
+```
+
+#### Tech References
+
+[NextJS](https://nextjs.org/docs) - Core/Routing/Bundling
+[React](https://react.dev/) - State/Dom management
+[tailwindcss](https://tailwindcss.com/) - Styling library
+[shadcn/ui](https://ui.shadcn.com/) - Component library
+[zod](https://www.npmjs.com/package/zod) - Schema builder

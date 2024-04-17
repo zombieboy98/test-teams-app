@@ -2,14 +2,12 @@
   "name": "next-teams-app",
   "version": "0.1.0",
   "engines": {
-    "node": "16 || 18"
+    "node": ">=20.x.x"
   },
   "private": true,
   "scripts": {
-    "dev:teamsfx": "concurrently \"npm run dev-tab:teamsfx\"",
-    "dev-tab:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
-    "dev": "next dev --experimental-https",
-    "dev:http": "next dev",
+    "dev:teams": "next dev --experimental-https",
+    "dev:web": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

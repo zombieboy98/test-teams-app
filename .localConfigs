@@ -1,7 +1,0 @@
-BROWSER=none
-HTTPS=true
-PORT=3000
-SSL_CRT_FILE=/Users/leonscottkennedy/.fx/certificate/localhost.crt
-SSL_KEY_FILE=/Users/leonscottkennedy/.fx/certificate/localhost.key
-REACT_APP_CLIENT_ID=5c65c252-952a-49e7-9e8b-d3a18f3e92dc
-REACT_APP_START_LOGIN_PAGE_URL=https://localhost:3000
